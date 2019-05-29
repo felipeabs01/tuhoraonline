@@ -1,1 +1,47 @@
-/* You can add global styles to this file, and also import other style files */
+.parallax {
+    /* The image used */
+    /* background-image: url(../src/assets/img/fond/calendar-black.png); */
+    /* Set a specific height */
+    height: 300px;
+    min-height: 300px;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.transbox {
+    margin: 30px;
+    background-color: #ffffff;
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+    /* For IE8 and earlier */
+}
+
+.transbox p {
+    margin: 5%;
+    font-weight: bold;
+    color: #000000;
+}
+
+
+/* PARALLAX */
+
+.puntero {
+    cursor: pointer;
+}
+
+.decoracion {
+    text-decoration: none !important;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
+}

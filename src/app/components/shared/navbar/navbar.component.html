@@ -1,0 +1,112 @@
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark col-md-12">
+    <a class="navbar-brand" href="#">TuHoraOnline</a>
+
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active" routerLinkActive="active">
+                <a class="nav-link" routerLink="inicio">Inicio</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="reserva">Reserva</a>
+            </li>
+
+        </ul>
+
+    </div>
+    <div *ngIf="profile" class="mr-4">
+        <span class="badge badge-success mr-2 mt-4" style="color: white">{{profile.nickname}}</span>
+        <img [src]="profile.picture" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
+    </div>
+    <button *ngIf="!auth.isAuthenticated()" (click)="login()" class="btn  my-2 my-sm-0 green" type="submit">Ingresar</button>
+    <button *ngIf="auth.isAuthenticated()" (click)="salir()" class="btn  my-2 my-sm-0 red" type="submit">Salir</button>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+</nav> -->
+
+
+
+<nav class="nav-extended blue-grey darken-4">
+    <div class="row">
+        <div class="nav-wrapper col s12">
+
+            <a class="brand-logo show-on-small hide-on-large-only">TuHoraOnline</a>
+            <a href="#" data-target="slide-out" class="sidenav-trigger"> <i class="large material-icons">dehaze</i></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+                <li>
+                    <div *ngIf="profile" class="mr-4">
+                        <span class="badge mr-2 mt-4" style="color: white">{{profile.nickname}}</span>
+                        <img  [src]="profile.picture" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
+                    </div>
+                </li>
+                <li>
+                    <button *ngIf="!auth.isAuthenticated()" (click)="login()" class="btn  my-2 my-sm-0 green" type="submit">Ingresar</button>
+                    <button *ngIf="auth.isAuthenticated()" (click)="salir()" class="btn  my-2 my-sm-0 red" type="submit">Salir</button>
+                </li>
+                <li>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                              </button>
+                </li>
+            </ul>
+            <ul id="nav-mobile" class="hide-on-med-and-down">
+
+                <!-- <li> <a class="brand-logo">TuHoraOnline</a></li> -->
+                <li>
+                    <a>
+                        <h5 routerLink="inicio">TuHoraOnline</h5>
+                    </a>
+                </li>
+                <li>
+                    <a class="decoracion white-text" routerLink="inicio">Inicio</a>
+                </li>
+                <li>
+                    <a class="decoracion white-text" routerLink="reserva">Reserva</a>
+                </li>
+                <li>
+                    <a class="decoracion white-text" routerLink="cliente">Cliente</a>
+                </li>
+            </ul>
+
+
+
+        </div>
+    </div>
+
+</nav>
+
+
+<!-- MENU TELEFONO -->
+<ul id="slide-out" class="sidenav">
+    <li>
+        <div class="user-view">
+            <div class="background">
+                <img src="../../../../assets/img/fond/calendar-phone.png">
+            </div>
+            <img  [src]="profile.picture" class="circle" alt="" width="50" height="50">
+            <!-- <a href="#user"><img class="circle" src="images/yuna.jpg"></a> -->
+            <a href="#name"><span class="white-text name">{{profile.nickname}}</span></a>
+            <!-- <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a> -->
+            <button *ngIf="!auth.isAuthenticated()" (click)="login()" class="btn  my-2 my-sm-0 green" type="submit">Ingresar</button>
+            <button *ngIf="auth.isAuthenticated()" (click)="salir()" class="btn  my-2 my-sm-0 red" type="submit">Salir</button>
+        </div>
+    </li>
+    <li>
+        <a href="#!" class="decoracion" routerLink="inicio">Inicio</a>
+    </li>
+    <li>
+        <a href="#!" class="decoracion" routerLink="reserva">Reserva</a>
+    </li>
+    <li>
+        <a href="#!" class="decoracion" routerLink="cliente">Cliente</a>
+    </li>
+    <li>
+        <div class="divider"></div>
+    </li>
+    <li><a class="subheader">Subheader</a></li>
+    <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+</ul>
