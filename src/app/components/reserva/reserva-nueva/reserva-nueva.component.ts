@@ -10,8 +10,9 @@ import { ReservaService } from '../../../services/reserva.service';
 import { Reserva } from '../../../models/reserva.module';
 import { PersonaG } from '../../../models/persona.module';
 import { Router } from '@angular/router';
-import { ConfiguracionG, Configuracion } from '../../../models/configuracion.module';
+
 import { ConfiguracionService } from '../../../services/configuracion.service';
+import { PersonaService } from '../../../services/persona.service';
 
 
 @Component({
@@ -33,7 +34,8 @@ export class ReservaNuevaComponent implements OnInit {
   constructor(private _clienteService:ClienteService,
     private _reservaService:ReservaService,
     private _router:Router,
-    private _configuracionService:ConfiguracionService
+    private _configuracionService:ConfiguracionService,
+    private _personaService:PersonaService
   ) {
     this.hora = Horario.hora.toString();
     this.fecha = Horario.fecha;
@@ -71,8 +73,8 @@ export class ReservaNuevaComponent implements OnInit {
       reserva.horaIni = Horario.hora;
       reserva.horaFin = 0;
       reserva.idCliente = cliente.idCliente;
-      reserva.idPersona = PersonaG.idPersona;
-      reserva.persona = PersonaG.nombre;
+      reserva.idPersona = this._personaService.persona.idPersona;
+      reserva.persona = this._personaService.persona.nombre;
 
       console.log(reserva);
 
