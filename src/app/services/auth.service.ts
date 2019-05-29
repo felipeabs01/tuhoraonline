@@ -104,7 +104,7 @@ export class AuthService {
       if (profile) {
         self.userProfile = profile;
       }
-      cb(err, profile);
+      cb(err, profile);   
     });
   }
 
