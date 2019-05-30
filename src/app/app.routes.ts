@@ -19,6 +19,7 @@ export const ROUTES: Routes = [
     {path:'ficha', component:FichaComponent,canActivate:[AuthGuardService]},
     {path:'nueva-ficha', component:FichaNuevaComponent,canActivate:[AuthGuardService]},
     
+    
    
     {path:'', pathMatch:'full', redirectTo:'inicio'},
     {path:'**', pathMatch:'full', redirectTo:'inicio'}
