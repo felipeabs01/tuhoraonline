@@ -46,8 +46,8 @@ registerLocaleData(localeES, "es");
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    // RouterModule.forRoot(ROUTES,{ useHash: true })
-    RouterModule.forRoot(ROUTES)
+     RouterModule.forRoot(ROUTES,{ useHash: true })
+    //RouterModule.forRoot(ROUTES,{ enableTracing: true })
 
     
   ],

@@ -54,13 +54,13 @@ export class AuthService {
      
         this.configuracion(authResult.idTokenPayload.name);
 
-        this.router.navigate(['/']);
+        this.router.navigate(['inicio']);
 
-        console.log(" handle");
+        
 
 
       } else if (err) {
-        this.router.navigate(['/']);
+        this.router.navigate(['inicio']);
         console.log(err);
       }
     });
@@ -72,6 +72,8 @@ export class AuthService {
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
+    localStorage.setItem('name', authResult.idTokenPayload.name);
+    
   }
 
   public logout(): void {
@@ -79,6 +81,7 @@ export class AuthService {
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
+    localStorage.removeItem('name');
     // Go back to the home route
     this.router.navigate(['/']);
   }
@@ -111,12 +114,19 @@ export class AuthService {
 
   configuracion(correo:string){
 
+   
+
+
     this._configuracionService.getConfiguracionByCorreo(correo).subscribe( (data:Configuracion)=>{
        
       this._configuracionService.configuracion = data[0];
+      console.log(ConfiguracionG.idEmpresa);
 
        this._personaService.getpersonaBycorreo(correo).subscribe((res:Persona) =>{     
         this._personaService.persona = res[0];
+      
+        console.log(res[0]);
+        console.log(PersonaG.email);
         console.log(this._personaService.persona);
         console.log(this._configuracionService.configuracion);
       })

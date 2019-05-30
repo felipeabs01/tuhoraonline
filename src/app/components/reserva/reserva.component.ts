@@ -7,8 +7,9 @@ import { Reserva } from '../../models/reserva.module';
 import { Horario } from '../../models/horario.module';
 import { Router } from '@angular/router';
 import { PersonaService } from '../../services/persona.service';
+
+import {  Subject, Subscription } from 'rxjs';
 import { PersonaG } from '../../models/persona.module';
-import { Observable, Subject, Subscription } from 'rxjs';
 
 
 declare var $:any;
@@ -45,17 +46,30 @@ export class ReservaComponent implements OnInit {
   
   constructor(
     private _reservaService : ReservaService,
-    private _personaService : PersonaService,
     private _configuracionService : ConfiguracionService,
     private _router:Router
   ) {
 
+    console.log(localStorage.getItem('name'));
+
     this.configuracion = this._configuracionService.configuracion;
     console.log(this.configuracion);
-   
+
+    
+    if(!this.configuracion){
+      this._configuracionService.
+      getConfiguracionByCorreo(localStorage.getItem('name'))
+      .subscribe(data=>{
+          console.log(data[0]);
+          this._configuracionService.configuracion = data[0];
+          this.configuracion = data[0];
+      })
+
+    }
+
+
      this.formattedDate = formatDate(new Date(), 'yyyy-MM-dd','es');
 
-      
 
       if(this.configuracion.minTurno <= 30)
         this.salto = 50;
@@ -66,11 +80,6 @@ export class ReservaComponent implements OnInit {
 
         this.llenarHorario(this.formattedDate);
         
-  
-    
-
- 
-
   }
 
 
@@ -161,8 +170,6 @@ export class ReservaComponent implements OnInit {
   
 
   cambiarFecha(valor){
-
-
     console.log(valor);
     this.calendario = valor;
 
@@ -222,13 +229,16 @@ export class ReservaComponent implements OnInit {
   
   ngOnDestroy(){
     this.subscription.unsubscribe();
-    
   }
+ 
 
 
 
   verDatePicker(){
+   
+    console.log("calendario");
     $(document).ready(function(){
+     
       $('.datepicker').datepicker(
         {
                   format: 'yyyy-mm-dd',

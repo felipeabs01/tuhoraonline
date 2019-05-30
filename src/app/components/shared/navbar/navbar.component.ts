@@ -26,17 +26,16 @@ export class NavbarComponent implements OnInit {
   ) { 
     auth.handleAuthentication();
 
-     console.log("handle");
-
+     
   }
-
+ 
   
   ngOnInit() {
-    console.log(this.auth);
-    console.log(this.auth.userProfile);
+    
     if (this.auth.userProfile && this.auth.userProfile !==undefined) {
       this.profile = this.auth.userProfile;
       console.log(this.profile);
+      this.auth.configuracion(this.profile.name);
     } else {
       this.auth.getProfile((err, profile) => {
         this.profile = profile;
