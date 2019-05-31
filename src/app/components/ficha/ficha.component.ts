@@ -5,6 +5,9 @@ import { FichaService } from '../../services/ficha.service';
 import { Ficha, FichaG } from '../../models/ficha.module';
 import { Router } from '@angular/router';
 
+
+declare var $:any;
+
 @Component({
   selector: 'app-ficha',
   templateUrl: './ficha.component.html',
@@ -14,6 +17,7 @@ export class FichaComponent implements OnInit {
 
   cliente:Cliente;
   fichas : Ficha[]=[];
+  ficha:Ficha;
 
   constructor(private _clienteService : ClienteService,
     private _fichaService : FichaService,
@@ -27,10 +31,26 @@ export class FichaComponent implements OnInit {
       this.fichas = data;
     });
 
+
    }
 
   ngOnInit() {
   }
+
+
+  detalleModal(ficha){
+
+    this.ficha = ficha;
+
+    $(document).ready(function(){
+      $('.modal').modal();
+    });
+
+    
+    console.log(ficha);
+
+  }
+
 
   fichaNueva(){
     FichaG.idFicha = 0;
@@ -38,7 +58,7 @@ export class FichaComponent implements OnInit {
   }
 
   editarFicha(ficha:Ficha){
-
+    console.log(ficha);
     this._fichaService.asignarFichaG(ficha);
     this._router.navigate(['nueva-ficha'])
   }
