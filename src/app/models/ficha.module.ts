@@ -22,6 +22,8 @@ export class Ficha {
  }
 
 
+
+
  export class FichaG {
 
   static idFicha : number;
