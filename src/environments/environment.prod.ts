@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
- // apiEndpoint: 'http://200.83.91.146:9001/api/',
-  apiEndpoint: 'https://localhost:44359/api/',
+  apiEndpoint: 'http://200.83.91.146:9001/api/',
+  //apiEndpoint: 'https://localhost:44359/api/',
   
   cdnEndpoint: '/',
   // cdnEndpoint: 'https://wellcot.azureedge.net/resources/',
