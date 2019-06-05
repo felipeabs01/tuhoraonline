@@ -21,7 +21,7 @@ export class AuthService {
     domain: 'spotiap.auth0.com',
     responseType: 'token id_token',
     //redirectUri: 'http://localhost:4200/signin-auth0',
-    //redirectUri: 'http://localhost:4200/callback',
+   //redirectUri: 'http://localhost:4200/callback',
     // redirectUri: 'http://200.83.91.146:4200/callback',
      // redirectUri: 'http://localhost:403/signin-auth0',
      redirectUri: 'http://200.83.91.146:403/', 

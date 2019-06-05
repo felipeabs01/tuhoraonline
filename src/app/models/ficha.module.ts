@@ -14,7 +14,7 @@ export class Ficha {
   idPersona: number;
   nombre : string;
   detalle : string;
-  fecha : Date;
+  fecha : string;
   valor : number;
   sesion : number;
   sesiones : number;
@@ -31,7 +31,7 @@ export class Ficha {
   static idPersona: number;
   static nombre : string;
   static detalle : string;
-  static fecha : Date;
+  static fecha : string;
   static valor : number;
   static sesion : number;
   static sesiones : number;

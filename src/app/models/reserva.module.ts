@@ -12,7 +12,7 @@ export class Reserva {
   idReserva : number;
   idCliente: number;
   idPersona : number;
-  fecha : Date;
+  fecha : string;
   horaIni : number;
   horaFin : number;
   activo : boolean;

@@ -47,15 +47,17 @@ export class ClienteComponent implements OnInit {
    verFicha(cliente:Cliente){
      this._clienteService.asignarClienteG(cliente);
      this.cliente = cliente;
-      this._router.navigate(['/ficha/'])
+      this._router.navigate(['/ficha/',cliente.idCliente])
 
    }
+  
 
-   editarCliente(cliente){
+   detalleCliente(cliente){
+     console.log(cliente);
     this._clienteService.asignarClienteG(cliente);
     this.cliente = cliente;
     console.log(this.cliente);
-    this._router.navigate(['/nuevo-cliente'])
+    this._router.navigate(['/detalle-cliente',cliente.idCliente])
  }
 
      nuevoCliente(){
