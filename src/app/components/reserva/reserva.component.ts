@@ -5,7 +5,7 @@ import { ConfiguracionService } from '../../services/configuracion.service';
 import { Configuracion, ConfiguracionG } from '../../models/configuracion.module';
 import { Reserva } from '../../models/reserva.module';
 import { Horario } from '../../models/horario.module';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { PersonaService } from '../../services/persona.service';
 
 import {  Subject, Subscription } from 'rxjs';
@@ -47,8 +47,19 @@ export class ReservaComponent implements OnInit {
   constructor(
     private _reservaService : ReservaService,
     private _configuracionService : ConfiguracionService,
-    private _router:Router
+    private _router:Router,
+    private _routerActivo:ActivatedRoute
   ) {
+
+    this.formattedDate = formatDate(new Date(), 'yyyy-MM-dd','es');
+    
+    this._routerActivo.params.subscribe(params=>{
+      if(params['fecha']){
+        console.log(params['fecha']);
+        this.formattedDate = formatDate(params['fecha'], 'yyyy-MM-dd','es');
+      }
+      
+    });
 
     console.log(localStorage.getItem('name'));
 
@@ -68,7 +79,7 @@ export class ReservaComponent implements OnInit {
     }
 
 
-     this.formattedDate = formatDate(new Date(), 'yyyy-MM-dd','es');
+     
 
 
       if(this.configuracion.minTurno <= 30)
@@ -87,12 +98,16 @@ export class ReservaComponent implements OnInit {
     
   }
 
-
+  OnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
 
 
   llenarHorario(fecha:string){
 
-    this.verDatePicker();
+    // this.verDatePicker();
 
       console.log('llenarhorario',fecha);
 
@@ -102,12 +117,15 @@ export class ReservaComponent implements OnInit {
   
       console.log();
       console.log(this.configuracion);
-
-       this.subscription =  this._reservaService.getReservasByEmpresaFecha(this.configuracion.idEmpresa,fecha).subscribe(  (data:any[])=>{
+      
+       this.subscription =  this._reservaService.getReservasByEmpresaFecha(this.configuracion.idEmpresa,fecha).subscribe(  (data:Reserva[])=>{
         this.reservas = data;
 
+        console.log(fecha);
+        console.log(this.subscription);
         console.log('datos traidos',data);
-      
+        console.log(this.reservas);
+        
       
         if(this.reservas != null)
       {
@@ -163,7 +181,7 @@ export class ReservaComponent implements OnInit {
     
   console.log(this.horario);
 
- 
+   
   // algo.unsubscribe();
   }
 
@@ -180,7 +198,7 @@ export class ReservaComponent implements OnInit {
     //   console.log(data);
     // } )
 
-    
+  
     this.llenarHorario(this.formattedDate);
 
   }
@@ -192,6 +210,8 @@ export class ReservaComponent implements OnInit {
       $('.modal').modal();
     });
 
+  
+
     this.reserva = reserva;
     console.log(this.reserva);
 
@@ -200,27 +220,29 @@ export class ReservaComponent implements OnInit {
 
   eliminarReserva(reserva)
   {
-    this.subscription.unsubscribe();
+   
 
     console.log('eliminar reserva',reserva);  
     reserva.activo = false;
-    const resp = this._reservaService.UpdateReserva(reserva.idReserva,reserva);
-    console.log(resp);
-    if(resp != null){
+
+    let as = this._reservaService.UpdateReserva(reserva.idReserva,reserva);
       
-      this._reservaService.getReservasByEmpresaFecha(this.configuracion.idEmpresa,this.formattedDate).subscribe(  (data:any[])=>{
-        this.reservas = data;
-        console.log('vuelta a cargar',data);
-      });
-
-
+    Promise.all([as]).then(data =>{
+      console.log(data);
       this.llenarHorario(this.formattedDate);
-      console.log(this.formattedDate);
-    }
-  
+    console.log(this.formattedDate);
+    })
+
+    
+      // this._reservaService.getReservasByEmpresaFecha(this.configuracion.idEmpresa,this.formattedDate).subscribe(  (data:any[])=>{
+      //   this.reservas = data;
+      //   console.log('vuelta a cargar',data);
+      // });
+
   }
 
   tomarHora(hora:any){
+    
     Horario.hora = hora.horaIni;
     this._router.navigate(['nueva-reserva'])
   }

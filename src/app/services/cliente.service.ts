@@ -33,6 +33,7 @@ export class ClienteService {
 // }
 
   asignarClienteG(cliente:Cliente){
+    
     ClienteG.activo = cliente.activo;
     ClienteG.contrasena = cliente.contrasena;
     ClienteG.email = cliente.email;

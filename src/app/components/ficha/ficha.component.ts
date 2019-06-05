@@ -24,6 +24,8 @@ export class FichaComponent implements OnInit {
     private _router:Router
   ) {
     
+// Tomar id por url
+
     this.cliente = this._clienteService.getClienteByClienteG();
     console.log(this.cliente);
     this._fichaService.getFichaByIdCliente(this.cliente.idCliente).subscribe((data:Ficha[])=>{

@@ -22,6 +22,7 @@ import { FichaComponent } from './components/ficha/ficha.component';
 import { FichaNuevaComponent } from './components/ficha/ficha-nueva/ficha-nueva.component';
 import { ClienteNuevoComponent } from './components/cliente/cliente-nuevo/cliente-nuevo.component';
 import { LoadingComponent } from './components/shared/loading/loading.component';
+import { ClienteDetalleComponent } from './components/cliente/cliente-detalle/cliente-detalle.component';
 
 registerLocaleData(localeES, "es");
 
@@ -38,6 +39,8 @@ registerLocaleData(localeES, "es");
     FichaNuevaComponent,
     ClienteNuevoComponent,
     LoadingComponent,
+    ClienteDetalleComponent,
+    
    
     
   ],

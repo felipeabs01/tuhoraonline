@@ -5,6 +5,7 @@ import { PersonaG } from 'src/app/models/persona.module';
 import { ConfiguracionService } from 'src/app/services/configuracion.service';
 import { Configuracion } from 'src/app/models/configuracion.module';
 import { Profile } from 'src/app/models/profile.mudule';
+import { formatDate } from '@angular/common';
 
 
 
@@ -16,6 +17,7 @@ import { Profile } from 'src/app/models/profile.mudule';
 })
 export class NavbarComponent implements OnInit {
 
+  fecha:string;
   profile:Profile;
 
   constructor(
@@ -26,7 +28,8 @@ export class NavbarComponent implements OnInit {
   ) { 
     auth.handleAuthentication();
 
-     
+    // this.fecha = formatDate(new Date(), 'yyyy-MM-dd','es');
+    
   }
  
   

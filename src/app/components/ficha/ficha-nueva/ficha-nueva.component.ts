@@ -3,6 +3,10 @@ import { ClienteG } from '../../../models/cliente.module';
 import { FichaG, Ficha } from '../../../models/ficha.module';
 import { formatDate } from '@angular/common';
 
+import { PersonaService } from '../../../services/persona.service';
+import { Router } from '@angular/router';
+import { FichaService } from '../../../services/ficha.service';
+
 @Component({
   selector: 'app-ficha-nueva',
   templateUrl: './ficha-nueva.component.html',
@@ -24,7 +28,7 @@ export class FichaNuevaComponent implements OnInit {
   
   nombre:string = '';
   detalle:string = '';
-  fecha : Date;
+  fecha : string;
   valor : number = 0;
   activo : boolean = true;
 
@@ -36,7 +40,10 @@ export class FichaNuevaComponent implements OnInit {
   nueva : boolean = false;
 
 
-  constructor() {
+  constructor(private _router:Router,
+  private _personaService:PersonaService,
+  private _fichaService:FichaService
+) {
 
     this.formattedDate = formatDate(new Date(), 'yyyy-MM-dd','es');
 
@@ -49,11 +56,14 @@ export class FichaNuevaComponent implements OnInit {
       this.nombre = FichaG.nombre;
       this.detalle = FichaG.detalle;
       this.valor = FichaG.valor;
-      this.fecha = FichaG.fecha;
+      this.fecha = FichaG.fecha.toString().slice(0,10);
       this.activo = FichaG.activo;
       this.formattedDate = FichaG.fecha.toString().slice(0,10);
     }else{
       this.nueva = true;
+      
+      this.fecha = (this.formattedDate.slice(0,10));
+      console.log(this.fecha);
     }
 
 
@@ -68,26 +78,46 @@ export class FichaNuevaComponent implements OnInit {
     if(this.nueva == false){
 
       const ficha = new Ficha;
-
-      console.log(this.activo);
-
       ficha.activo = true;
-
-      console.log(ficha.activo);
-
       ficha.fecha = this.fecha;
       ficha.detalle = this.detalle;
       ficha.nombre = this.nombre;
       ficha.valor = this.valor;
   
-      ficha.idCliente = FichaG.idCliente;
       ficha.idFicha = FichaG.idFicha;
+      ficha.idCliente = FichaG.idCliente;
       ficha.idPersona = FichaG.idPersona;
       ficha.sesion = FichaG.sesion;
       ficha.sesiones = FichaG.sesiones;
-  
       console.log(ficha);
+      this._fichaService.UpdateFicha(ficha.idFicha.toString(),ficha);
+      this._router.navigate(['/ficha',FichaG.idCliente]);
+
+    }else{
+
+      const ficha = new Ficha;
+
+      ficha.activo = true;
+      ficha.fecha = this.fecha;
+      ficha.detalle = this.detalle;
+      ficha.nombre = this.nombre;
+      ficha.valor = this.valor;
+  
+      ficha.idCliente = ClienteG.idCliente;
+      // ficha.idFicha = FichaG.idFicha;
+      ficha.idPersona = this._personaService.persona.idPersona;
+      ficha.sesion = 0;
+      ficha.sesiones = 0;
+      console.log(ficha);
+      this._fichaService.AddFicha(ficha);
+      this._router.navigate(['/ficha', ClienteG.idCliente]);
+
+      
+
+      //AGREGAR BOLETA
+
     }
+    
     
     
   }

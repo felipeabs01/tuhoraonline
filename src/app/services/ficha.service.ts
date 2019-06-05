@@ -64,9 +64,7 @@ url : string;
 
 
     return this.http.put(url,body,{headers}).pipe(
-      map(response => response)).subscribe(data => console.log(data));;
-
-
+      map(response => response)).subscribe(data => console.log(data));
   }
 
 

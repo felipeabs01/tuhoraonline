@@ -4,7 +4,7 @@ import { ClienteService } from '../../../services/cliente.service';
 
 
 import {FormControl} from '@angular/forms';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { ReservaService } from '../../../services/reserva.service';
 import { Reserva } from '../../../models/reserva.module';
@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 
 import { ConfiguracionService } from '../../../services/configuracion.service';
 import { PersonaService } from '../../../services/persona.service';
+import { formatDate } from '@angular/common';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class ReservaNuevaComponent implements OnInit {
   clientes:any[]=[];
   cliente:string;
   fecha: string;
+  
   
 
   ngOnInit() {
@@ -66,7 +68,8 @@ export class ReservaNuevaComponent implements OnInit {
       const reserva = new Reserva;
       
       reserva.cliente = cliente.nombre;
-      reserva.fecha = new Date(Horario.fecha);
+      reserva.fecha = formatDate(Horario.fecha, 'yyyy-MM-dd','es');
+
       // reserva.fecha.setDate( reserva.fecha.getDate()+1 );
 
       reserva.activo = true;
@@ -77,10 +80,24 @@ export class ReservaNuevaComponent implements OnInit {
       reserva.persona = this._personaService.persona.nombre;
 
       console.log(reserva);
+      const fecha = formatDate(reserva.fecha, 'yyyy-MM-dd','es');
+      console.log(fecha);
 
-      const resp = this._reservaService.AddReserva(reserva);
-      console.log(resp);
-      this._router.navigate(['/reserva'])
+      
+     
+      let as =   this._reservaService.AddReserva(reserva)
+      
+      Promise.all([as]).then(data =>{
+        console.log(data);
+        this._router.navigate(['/reserva',fecha]);
+      })
+
+         
+     
+      
+      
+      
+      
 
    }
 
