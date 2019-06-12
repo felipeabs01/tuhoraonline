@@ -8,6 +8,9 @@ import { FichaComponent } from './components/ficha/ficha.component';
 import { FichaNuevaComponent } from './components/ficha/ficha-nueva/ficha-nueva.component';
 import { ClienteNuevoComponent } from './components/cliente/cliente-nuevo/cliente-nuevo.component';
 import { ClienteDetalleComponent } from './components/cliente/cliente-detalle/cliente-detalle.component';
+import { FichaDetalleComponent } from './components/ficha/ficha-detalle/ficha-detalle.component';
+import { PagoNuevoComponent } from './components/pago/pago-nuevo/pago-nuevo.component';
+import { ReservaDetalleComponent } from './components/reserva/reserva-detalle/reserva-detalle.component';
 
 
 export const ROUTES: Routes = [
@@ -16,12 +19,14 @@ export const ROUTES: Routes = [
     {path:'reserva', component:ReservaComponent,canActivate:[AuthGuardService]},
     {path:'reserva/:fecha', component:ReservaComponent,canActivate:[AuthGuardService]},  
     {path:'nueva-reserva', component:ReservaNuevaComponent,canActivate:[AuthGuardService]},
+    {path:'detalle-reserva/:id', component:ReservaDetalleComponent,canActivate:[AuthGuardService]},
     {path:'cliente', component:ClienteComponent,canActivate:[AuthGuardService]},
     {path:'nuevo-cliente', component:ClienteNuevoComponent,canActivate:[AuthGuardService]},
     {path:'detalle-cliente/:id', component:ClienteDetalleComponent,canActivate:[AuthGuardService]},
     {path:'ficha/:id', component:FichaComponent,canActivate:[AuthGuardService]},
     {path:'nueva-ficha', component:FichaNuevaComponent,canActivate:[AuthGuardService]},
-    
+    {path:'detalle-ficha/:id', component:FichaDetalleComponent,canActivate:[AuthGuardService]},
+    {path:'nuevo-pago', component:PagoNuevoComponent,canActivate:[AuthGuardService]},
     
    
     {path:'', pathMatch:'full', redirectTo:'inicio'},

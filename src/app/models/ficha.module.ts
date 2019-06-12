@@ -19,6 +19,7 @@ export class Ficha {
   sesion : number;
   sesiones : number;
   activo : boolean;
+  pagada : boolean;
  }
 
 
@@ -36,6 +37,7 @@ export class Ficha {
   static sesion : number;
   static sesiones : number;
   static activo : boolean;
+  static pagada : boolean;
  }
 
 

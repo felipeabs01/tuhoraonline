@@ -2,48 +2,45 @@
     <ol class="breadcrumb blue-grey darken-4">
         <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
         <li class="breadcrumb-item"><a routerLink="/cliente">Cliente</a></li>
-        <li class="breadcrumb-item"><a routerLink="/ficha">Ficha</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Nueva</li>
+        <li class="breadcrumb-item"><a routerLink="/ficha/{{id}}">Ficha</a></li>
+        <li *ngIf="nueva" class="breadcrumb-item active" aria-current="page">Nueva</li>
+        <li *ngIf="!nueva" class="breadcrumb-item active" aria-current="page">Editar</li>
     </ol>
 </nav>
 
 <h5 class="mb-4">Cliente: {{cliente.nombre}}</h5>
 
 
-<div class="container col s12 m8">
-
-    <div class="row">
-        <div class="input-field col s12">
-            <input [(ngModel)]="nombre" #ctrl="ngModel" type="text" required>
-            <label class="active" for="nombre">Nombre</label>
+<div class="row">
+    <form class="col s12">
+        <div class="row">
+            <div class="input-field col s12">
+                <input [(ngModel)]="ficha.nombre" name="nombre" #ctrl="ngModel" type="text" required>
+                <label class="active" for="nombre">Nombre</label>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="input-field col s12">
-            <input [(ngModel)]="detalle" #ctrl="ngModel" type="text" required>
-            <label class="active" for="detalle">Detalle</label>
+        <div class="row">
+            <div class="input-field col s12">
+                <input [(ngModel)]="ficha.detalle" name="detalle" #ctrl="ngModel" type="text" required>
+                <label class="active" for="detalle">Detalle</label>
+            </div>
         </div>
-    </div>
-    <!-- <div class="row ml-2">
-        <p>
-            <label>
-                                  <input *ngIf="activo" type="checkbox" checked="checked" />
-                                  <input *ngIf="!activo" type="checkbox" />
-                                  <span>Activo</span>
-                                </label>
-        </p>
-
-    </div> -->
-    <div class="row">
-        <div class="input-field col s12">
-            <input [(ngModel)]="valor" #ctrl="ngModel" type="text" required>
-            <label class="active" for="valor">Valor</label>
+        <div class="row">
+            <div class="input-field col s6">
+                <input [(ngModel)]="ficha.valor" name="valor" #ctrl="ngModel" type="text" required>
+                <label class="active" for="valor">Valor</label>
+            </div>
+            <div class="input-field col s6">
+                <input #dp="ngModel" [(ngModel)]="ficha.fecha" name="fecha" placeholder="Seleccione fecha" type="date">
+                <label class="active" for="fecha">Fecha</label>
+            </div>
         </div>
-    </div>
-    <div class="row col s12">
-        <input #dp="ngModel" [ngModel]="formattedDate" placeholder="Seleccione fecha" type="date" id="fecha">
-    </div>
 
+        <div class="row">
+            <div class="input-field col s12">
+                <button class="btn  waves-effect waves-light btn-small text-white right" (click)="guardarFicha()">Guardar</button>
+            </div>
+        </div>
+    </form>
 
-    <button class="btn  waves-effect waves-light btn-small text-white right" (click)="guardarFicha()">Guardar</button>
 </div>

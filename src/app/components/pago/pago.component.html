@@ -1,0 +1,15 @@
+<div class="container-fluid">
+    <ul class="list-inline">
+        <li class="list-inline-item">
+            <h5>Pagos:</h5>
+        </li>
+        <a (click)="nuevoPago()" class="btn-floating btn- waves-effect waves-light red right mt-1"><i class="material-icons">add</i></a>
+    </ul>
+    <ul class="collapsible">
+        <li *ngFor="let item of items">
+            {{item.monto}}
+            <span class="badge">{{item.fecha}}</span>
+        </li>
+
+    </ul>
+</div>

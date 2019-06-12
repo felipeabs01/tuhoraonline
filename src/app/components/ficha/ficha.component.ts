@@ -3,7 +3,7 @@ import { ClienteService } from '../../services/cliente.service';
 import { Cliente, ClienteG } from '../../models/cliente.module';
 import { FichaService } from '../../services/ficha.service';
 import { Ficha, FichaG } from '../../models/ficha.module';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 declare var $:any;
@@ -18,20 +18,24 @@ export class FichaComponent implements OnInit {
   cliente:Cliente;
   fichas : Ficha[]=[];
   ficha:Ficha;
+  id:string;
 
   constructor(private _clienteService : ClienteService,
     private _fichaService : FichaService,
     private _router:Router
   ) {
-    
+   
 // Tomar id por url
 
     this.cliente = this._clienteService.getClienteByClienteG();
     console.log(this.cliente);
-    this._fichaService.getFichaByIdCliente(this.cliente.idCliente).subscribe((data:Ficha[])=>{
-      console.log(data);
-      this.fichas = data;
-    });
+
+  
+  this._fichaService.getFichaPagadaByIdCliente(this.cliente.idCliente).subscribe((data:Ficha[])=>{
+    console.log(data);
+    this.fichas = data;
+  });
+
 
 
    }
@@ -40,16 +44,10 @@ export class FichaComponent implements OnInit {
   }
 
 
-  detalleModal(ficha){
-
-    this.ficha = ficha;
-
-    $(document).ready(function(){
-      $('.modal').modal();
-    });
-
-    
-    console.log(ficha);
+  verDetalle(ficha:Ficha){
+    console.log(ficha.idFicha);
+    this._fichaService.asignarFichaG(ficha);
+    this._router.navigate(['detalle-ficha',ficha.idFicha])
 
   }
 

@@ -14,7 +14,7 @@
 
 
 
-
+<!-- 
 <div id="modal1" class="modal modal-fixed-footer">
     <div class="modal-content">
         <h5>Cliente: {{cliente.nombre}}</h5>
@@ -22,22 +22,27 @@
         <h6>Nombre: {{ficha.nombre}}</h6>
         <h6>Valor: {{ficha.valor}}</h6>
         <p>Detalle:{{ficha.detalle}}</p>
+        <p>Estado:{{ficha.pagada}}</p>
     </div>
     <div class="modal-footer">
 
         <a class="modal-close waves-effect waves-red btn-flat">Cancelar</a>
-        <!-- <button class="modal-close btn  waves-effect waves-light btn-small text-white" (click)="eliminarReserva(reserva)">Aceptar</button> -->
+        
         <button class="btn  waves-effect waves-light btn-small text-white right" (click)="editarFicha(ficha)">Editar</button>
     </div>
-</div>
+</div> -->
 
 
 
 <ul class="collapsible">
     <li *ngFor="let item of fichas">
-        <div class="collapsible-header">
+        <div *ngIf="item.pagada" class="collapsible-header" style="color: green">
             <i class="material-icons">date_range</i>{{item.fecha|date:'dd-MM-yyyy'}} {{item.nombre}}
-            <span data-target="modal1" (click)="detalleModal(item)" class="new badge modal-trigger" data-badge-caption="detalle">Ver</span>
+            <span (click)="verDetalle(item)" class="new badge " data-badge-caption="detalle">Ver</span>
+        </div>
+        <div *ngIf="!item.pagada" class="collapsible-header">
+            <i class="material-icons">date_range</i>{{item.fecha|date:'dd-MM-yyyy'}} {{item.nombre}}
+            <span (click)="verDetalle(item)" class="new badge " data-badge-caption="detalle">Ver</span>
         </div>
 
     </li>
