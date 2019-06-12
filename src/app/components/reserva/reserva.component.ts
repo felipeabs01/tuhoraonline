@@ -107,6 +107,7 @@ export class ReservaComponent implements OnInit {
 
   llenarHorario(fecha:string){
 
+
     // this.verDatePicker();
 
       console.log('llenarhorario',fecha);
@@ -204,16 +205,18 @@ export class ReservaComponent implements OnInit {
   }
 
 
-  eliminarModal(reserva){
+  eliminarModal(reserva:Reserva){
 
-    $(document).ready(function(){
-      $('.modal').modal();
-    });
+    // $(document).ready(function(){
+    //   $('.modal').modal();
+    // });
+    console.log(reserva);
+    this._reservaService.assign(reserva);
 
-  
+    this._router.navigate(['detalle-reserva',reserva.idReserva]);
 
-    this.reserva = reserva;
-    console.log(this.reserva);
+    // this.reserva = reserva;
+    // console.log(this.reserva);
 
   }
 

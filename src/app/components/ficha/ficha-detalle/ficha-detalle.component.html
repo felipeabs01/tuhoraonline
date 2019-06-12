@@ -1,0 +1,37 @@
+<nav aria-label="breadcrumb" class="mb-5 blue-grey darken-1">
+    <ol class="breadcrumb blue-grey darken-4">
+        <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
+        <li class="breadcrumb-item"><a routerLink="/cliente">Cliente</a></li>
+        <li class="breadcrumb-item"><a routerLink="/ficha/{{id}}">Ficha</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Detalle</li>
+
+    </ol>
+</nav>
+
+<div class="row">
+    <div class="col s12 m6">
+        <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+                <span class="card-title">{{cliente.nombre}}</span>
+
+                <h6>Fecha: {{ficha.fecha|date:'dd-MM-yyyy'}}</h6>
+                <h6>Nombre: {{ficha.nombre}}</h6>
+                <h6>Valor: {{ficha.valor}}</h6>
+                <p>Detalle: {{ficha.detalle}}</p>
+
+                <p *ngIf="ficha.pagada">
+                    <span class="white-text">Estado: Pagado</span>
+                </p>
+                <p *ngIf="!ficha.pagada">
+                    <span class="white-text">Estado: Pendiente</span>
+                </p>
+            </div>
+            <div class="card-action">
+                <button class="btn  waves-effect waves-light btn-small text-white right" (click)="editarFicha(ficha)">Editar</button>
+                <!-- <a href="#">This is a link</a> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-pago [items]="pagos"></app-pago>

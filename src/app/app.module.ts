@@ -23,6 +23,10 @@ import { FichaNuevaComponent } from './components/ficha/ficha-nueva/ficha-nueva.
 import { ClienteNuevoComponent } from './components/cliente/cliente-nuevo/cliente-nuevo.component';
 import { LoadingComponent } from './components/shared/loading/loading.component';
 import { ClienteDetalleComponent } from './components/cliente/cliente-detalle/cliente-detalle.component';
+import { FichaDetalleComponent } from './components/ficha/ficha-detalle/ficha-detalle.component';
+import { PagoComponent } from './components/pago/pago.component';
+import { ReservaDetalleComponent } from './components/reserva/reserva-detalle/reserva-detalle.component';
+import { PagoNuevoComponent } from './components/pago/pago-nuevo/pago-nuevo.component';
 
 registerLocaleData(localeES, "es");
 
@@ -40,6 +44,10 @@ registerLocaleData(localeES, "es");
     ClienteNuevoComponent,
     LoadingComponent,
     ClienteDetalleComponent,
+    FichaDetalleComponent,
+    PagoComponent,
+    ReservaDetalleComponent,
+    PagoNuevoComponent,
     
    
     

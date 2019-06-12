@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Reserva } from '../models/reserva.module';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment.prod';
+import { Observable, observable } from 'rxjs';
 
 
 @Injectable({
@@ -11,7 +12,10 @@ import { environment } from 'src/environments/environment.prod';
 export class ReservaService {
 url : string;
 
+
 headers:HttpHeaders;
+private reserva:Reserva;
+res: Observable<Reserva>;
 
   constructor(
     private http:HttpClient
@@ -35,6 +39,16 @@ headers:HttpHeaders;
   }
 
 
+   assign(data:Reserva){
+     this.reserva = data;
+     
+     
+   }
+
+   getres(){
+     return this.reserva;
+   }
+
   
    AddReserva(body: Reserva){
     const url = `${this.url}reserva`;
@@ -42,7 +56,7 @@ headers:HttpHeaders;
       'Content-Type': 'application/json'
     });
     var promise = new Promise((resolve) => {
-      setTimeout(() => {
+     
         console.log("Async Work Complete");
         this.http.post<Reserva>(url,body,{headers}).pipe(
           map(response => response)).subscribe((data:Reserva) => {
@@ -51,7 +65,7 @@ headers:HttpHeaders;
               resolve("agregado"+data);
             }
           });
-      }, 1);
+      
     });
     return promise;
     // return  this.http.post<Reserva>(url,body,{headers}).pipe(
@@ -67,7 +81,7 @@ headers:HttpHeaders;
     //   map(response => response)).subscribe(data => console.log(data));;
 
       var promise = new Promise((resolve) => {
-        setTimeout(() => {
+     
           console.log("Async Work Complete");
           this.http.put(url,body,{headers}).pipe(
             map(response => response)).subscribe((data:Reserva) => {
@@ -76,7 +90,7 @@ headers:HttpHeaders;
                 resolve("actualizado"+body);
               
             });
-        }, 1);
+      
       });
       return promise;
       // return  this.http.post<Reserva>(url,body,{headers}).pipe(

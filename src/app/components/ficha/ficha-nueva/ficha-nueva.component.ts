@@ -4,8 +4,10 @@ import { FichaG, Ficha } from '../../../models/ficha.module';
 import { formatDate } from '@angular/common';
 
 import { PersonaService } from '../../../services/persona.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FichaService } from '../../../services/ficha.service';
+import { BoletaService } from '../../../services/boleta.service';
+import { Boleta } from '../../../models/boleta.module';
 
 @Component({
   selector: 'app-ficha-nueva',
@@ -14,26 +16,18 @@ import { FichaService } from '../../../services/ficha.service';
 })
 export class FichaNuevaComponent implements OnInit {
 
-  // id_ficha int IDENTITY(1,1) NOT NULL,
-  // id_cliente int not null,
-  // id_persona int not null,
-  // nombre varchar(200) NOT NULL,
-  // detalle varchar(500),
-  // fecha date not null,
-  // valor int not null,
-  // sesion int not null,
-  // sesiones int not null,
-  // activo bit NOT NULL,
 
+  ficha: Ficha;
+  ultimaFicha:Ficha;
   
-  nombre:string = '';
-  detalle:string = '';
-  fecha : string;
-  valor : number = 0;
-  activo : boolean = true;
+  // nombre:string = '';
+  // detalle:string = '';
+  // fecha : string;
+  // valor : number = 0;
+  // activo : boolean = true;
 
   formattedDate:string = '';
-
+  id:string;
  
   cliente = ClienteG;
 
@@ -42,30 +36,39 @@ export class FichaNuevaComponent implements OnInit {
 
   constructor(private _router:Router,
   private _personaService:PersonaService,
-  private _fichaService:FichaService
+  private _fichaService:FichaService,
+  private _boletaService:BoletaService
 ) {
 
-    this.formattedDate = formatDate(new Date(), 'yyyy-MM-dd','es');
+  
+  this.id=ClienteG.idCliente.toString();
+
+    this.formattedDate = formatDate(new Date(), 'dd-MM-yyyy','es');
 
     console.log(FichaG.idFicha);
     console.log(FichaG.nombre);
     if(FichaG.idFicha!=0){
+      
       // this.nombre = FichaG.nombre;
       // this.detalle = FichaG.detalle;
-
-      this.nombre = FichaG.nombre;
-      this.detalle = FichaG.detalle;
-      this.valor = FichaG.valor;
-      this.fecha = FichaG.fecha.toString().slice(0,10);
-      this.activo = FichaG.activo;
-      this.formattedDate = FichaG.fecha.toString().slice(0,10);
+      this.ficha = this._fichaService.getFichaG();
+      console.log(this.ficha );
+      // this.nombre = FichaG.nombre;
+      // this.detalle = FichaG.detalle;
+      // this.valor = FichaG.valor;
+      this.ficha.fecha =  this.ficha.fecha.toString().slice(0,10);
+      // this.activo = FichaG.activo;
+      this.formattedDate =  this.ficha.fecha.toString().slice(0,10);
     }else{
       this.nueva = true;
-      
-      this.fecha = (this.formattedDate.slice(0,10));
-      console.log(this.fecha);
-    }
 
+      this.ficha = new Ficha;
+
+      this.ficha.fecha = formatDate(new Date(), 'dd-MM-yyyy','es').slice(0,10);
+      // this.fecha = (this.formattedDate.slice(0,10));
+      console.log(this.formattedDate);
+    }
+    console.log(this.ficha.fecha);
 
    }
 
@@ -76,32 +79,30 @@ export class FichaNuevaComponent implements OnInit {
   guardarFicha(){
 
     if(this.nueva == false){
+      console.log(this.ficha);
 
-      const ficha = new Ficha;
-      ficha.activo = true;
-      ficha.fecha = this.fecha;
-      ficha.detalle = this.detalle;
-      ficha.nombre = this.nombre;
-      ficha.valor = this.valor;
-  
-      ficha.idFicha = FichaG.idFicha;
-      ficha.idCliente = FichaG.idCliente;
-      ficha.idPersona = FichaG.idPersona;
-      ficha.sesion = FichaG.sesion;
-      ficha.sesiones = FichaG.sesiones;
-      console.log(ficha);
-      this._fichaService.UpdateFicha(ficha.idFicha.toString(),ficha);
-      this._router.navigate(['/ficha',FichaG.idCliente]);
+      
+      
+      let as = this._fichaService.UpdateFicha(this.ficha.idFicha.toString(),this.ficha);
+      
+      Promise.all([as]).then(data =>{
+        console.log(data);
+
+        //modificar monto si cambie en ficha
+        this._router.navigate(['/ficha',FichaG.idCliente]);
+     
+      })
 
     }else{
 
       const ficha = new Ficha;
+      
 
       ficha.activo = true;
-      ficha.fecha = this.fecha;
-      ficha.detalle = this.detalle;
-      ficha.nombre = this.nombre;
-      ficha.valor = this.valor;
+      ficha.fecha = this.ficha.fecha;
+      ficha.detalle = this.ficha.detalle;
+      ficha.nombre = this.ficha.nombre;
+      ficha.valor = this.ficha.valor;
   
       ficha.idCliente = ClienteG.idCliente;
       // ficha.idFicha = FichaG.idFicha;
@@ -109,10 +110,43 @@ export class FichaNuevaComponent implements OnInit {
       ficha.sesion = 0;
       ficha.sesiones = 0;
       console.log(ficha);
-      this._fichaService.AddFicha(ficha);
-      this._router.navigate(['/ficha', ClienteG.idCliente]);
+
+      let as = this._fichaService.AddFicha(ficha);
+      
+      Promise.all([as]).then(data =>{
+        console.log(data);
+
+        this._fichaService.getUltimaFichaByIdCliente(ClienteG.idCliente)
+        .subscribe((data:Ficha)=>{
+            console.log(data);
+            console.log(data.idFicha);
+            this.ultimaFicha = data;
+
+
+            console.log(this.ultimaFicha.idFicha);
+            if(this.ultimaFicha.idFicha != 0){
+              const bol = new Boleta;
+              bol.activo = true;
+              bol.fecha = this.ultimaFicha.fecha.slice(0,10);
+              bol.idFicha = this.ultimaFicha.idFicha;
+              bol.monto = this.ultimaFicha.valor;
+              bol.pagada = false;
+    
+              console.log(bol);
+             let as = this._boletaService.AddBoleta(bol);
+              Promise.all([as]).then(data =>{
+                console.log("Boleta Agregada",data);
+                this._router.navigate(['/ficha',ClienteG.idCliente]);
+              });
+            }
+
+        });
 
       
+       
+
+        
+      })
 
       //AGREGAR BOLETA
 

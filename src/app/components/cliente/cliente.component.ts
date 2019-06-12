@@ -74,14 +74,12 @@ export class ClienteComponent implements OnInit {
     $('.modal').modal();
   });
 
-  // this._clienteService.asignarClienteG(cliente);
-  
-
-  
-
-  
 }
 
+pagoCliente(cliente)
+{
+  console.log(cliente);
+}
 
 
 

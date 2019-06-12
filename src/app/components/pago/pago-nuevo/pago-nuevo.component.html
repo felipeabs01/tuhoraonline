@@ -1,0 +1,65 @@
+<nav aria-label="breadcrumb" class="mb-5 blue-grey darken-1">
+    <ol class="breadcrumb blue-grey darken-4">
+        <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
+        <li class="breadcrumb-item"><a routerLink="/cliente">Cliente</a></li>
+        <li class="breadcrumb-item"><a routerLink="/Ficha/{{ficha.idFicha}}">Ficha</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Pago</li>
+    </ol>
+</nav>
+
+
+
+
+<div class="row">
+    <div class="row col s4">
+        <div class="jumbotron col s12">
+            <h6 class="m-2">Total: {{boleta.monto}}</h6>
+            <h6 class="m-2">Pagado: {{pagado}}</h6>
+            <h6 class="m-2">Saldo: {{saldo}}</h6>
+        </div>
+    </div>
+
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="col s12">
+        <div class="row">
+            <div class="input-field col s12">
+
+                <input type="text" formControlName="monto" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.monto.errors }" />
+                <div *ngIf="submitted && f.monto.errors" class="invalid-feedback">
+                    <div *ngIf="f.monto.errors.required">Monto es requerido</div>
+                    <div *ngIf="f.monto.errors.pattern">Solo números</div>
+                </div>
+                <label class="active" for="monto">Monto</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s6">
+                <input type="date" formControlName="fecha" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fecha.errors }" />
+                <div *ngIf="submitted && f.fecha.errors" class="invalid-feedback">
+                    <div *ngIf="f.fecha.errors.required">Fecha es requerida</div>
+                </div>
+                <label class="active" for="fecha">Fecha</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <label class="active" for="pago">Tipo de pago</label>
+                <select class="custom-select" id="inputGroupSelect01" formControlName="pago">
+                    <option value="1">Efectivo</option>
+                    <option value="2">Débito</option>
+                    <option value="3">Crédito</option>
+                  </select>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <button class="btn  waves-effect waves-light btn-small text-white right">Guardar</button>
+            </div>
+        </div>
+    </form>
+
+</div>

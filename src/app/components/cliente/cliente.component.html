@@ -25,6 +25,7 @@
                         <span class="title"> {{item.nombre}}</span>
                         <span class="hide-on-small-only secondary-content puntero badge badge-secondary badge-pill white-text " (click)="verFicha(item)">Ver ficha</span>
                         <span class="hide-on-small-only secondary-content puntero badge badge-secondary badge-pill white-text " (click)="detalleCliente(item)">Ver detalle</span>
+                        <span class="hide-on-small-only secondary-content puntero badge badge-secondary badge-pill white-text " (click)="pagoCliente(item)">Ver pagos</span>
                         <span data-target="modal1" class="modal-trigger show-on-small hide-on-med-and-up secondary-content puntero badge badge-secondary badge-pill white-text " (click)="opcionesModal(item)"> <i class="material-icons">more_vert</i></span>
 
 
@@ -51,7 +52,7 @@
         <h6>Seleccionar opción.</h6>
         <a class="waves-effect waves-light btn-small puntero white-text badge badge-secondary m-2" (click)="verFicha(cliente)">Ver ficha</a>
         <a class="waves-effect waves-light btn-small puntero white-text badge badge-secondary m-2" (click)="detalleCliente(cliente)">Ver detalle</a>
-
+        <a class="waves-effect waves-light btn-small puntero white-text badge badge-secondary m-2" (click)="pagoCliente(cliente)">Ver pagos</a>
     </div>
     <div class="modal-footer">
 

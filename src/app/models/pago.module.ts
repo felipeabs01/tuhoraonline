@@ -7,18 +7,14 @@ import { CommonModule } from '@angular/common';
   ],
   declarations: []
 })
-export class Reserva {
+export class Pago {
 
-  idReserva : number;
-  idCliente: number;
-  idPersona : number;
+  idPago : number;
+  idBoleta: number;
+  idTipoPago: number;
   fecha : string;
-  horaIni : number;
-  horaFin : number;
+  monto : number;
   activo : boolean;
-  cliente : string;
-  persona : string;
- 
  }
 
- 
+
