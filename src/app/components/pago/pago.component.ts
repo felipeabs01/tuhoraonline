@@ -16,7 +16,5 @@ export class PagoComponent implements OnInit {
   ngOnInit() {
   }
 
-  nuevoPago(){
-    this._router.navigate(['nuevo-pago']);
-  }
+ 
 }

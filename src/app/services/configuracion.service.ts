@@ -29,18 +29,26 @@ export class ConfiguracionService {
 
   getConfiguracion(){
 
-    console.log(this.configuracion);
-   
+    var promise = new Promise((resolve) => {
+      console.log("Async Work Complete");
       this.getConfiguracionByCorreo(localStorage.getItem('name')).subscribe( (data:Configuracion)=>{
         
         this.configuracion = data[0];
          
          console.log(this.configuracion);
-      })
-  
-     
-    
+         resolve("agregado"+ this.configuracion);
+      });
+    });
+    return promise;
 
+    // console.log(this.configuracion);
+   
+    //   this.getConfiguracionByCorreo(localStorage.getItem('name')).subscribe( (data:Configuracion)=>{
+        
+    //     this.configuracion = data[0];
+         
+    //      console.log(this.configuracion);
+    //   })
   }
 
  

@@ -11,6 +11,7 @@ import { ClienteDetalleComponent } from './components/cliente/cliente-detalle/cl
 import { FichaDetalleComponent } from './components/ficha/ficha-detalle/ficha-detalle.component';
 import { PagoNuevoComponent } from './components/pago/pago-nuevo/pago-nuevo.component';
 import { ReservaDetalleComponent } from './components/reserva/reserva-detalle/reserva-detalle.component';
+import { PagoListaComponent } from './components/pago/pago-lista/pago-lista.component';
 
 
 export const ROUTES: Routes = [
@@ -27,6 +28,7 @@ export const ROUTES: Routes = [
     {path:'nueva-ficha', component:FichaNuevaComponent,canActivate:[AuthGuardService]},
     {path:'detalle-ficha/:id', component:FichaDetalleComponent,canActivate:[AuthGuardService]},
     {path:'nuevo-pago', component:PagoNuevoComponent,canActivate:[AuthGuardService]},
+    {path:'pagos/:id', component:PagoListaComponent,canActivate:[AuthGuardService]},
     
    
     {path:'', pathMatch:'full', redirectTo:'inicio'},

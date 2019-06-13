@@ -8,6 +8,7 @@ import { BoletaService } from '../../../services/boleta.service';
 import { Boleta } from '../../../models/boleta.module';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PagoService } from '../../../services/pago.service';
+import { ClienteG } from '../../../models/cliente.module';
 
 @Component({
   selector: 'app-pago-nuevo',
@@ -23,6 +24,7 @@ export class PagoNuevoComponent implements OnInit {
   pagado=0;
   ficha:Ficha;
   pagos:Pago[]=[];
+  cliente:string;
   
  
   constructor(private formBuilder: FormBuilder,
@@ -33,6 +35,8 @@ private _pagoService:PagoService) {
     //OBTENEr boleta de ficha
     this.ficha = this._fichaService.getFichaG();
     console.log(this.ficha);
+
+    this.cliente = ClienteG.idCliente.toString();
 
     this._boletaService.getBoletaByFicha(this.ficha.idFicha)
     .subscribe((data:Boleta)=>{

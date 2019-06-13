@@ -23,8 +23,13 @@ export class FichaDetalleComponent implements OnInit {
     private _router:Router,
     private _pagoService:PagoService
   ) {
+    
 
     this.ficha = this._fichaService.getFichaG();
+    if(!this.ficha || !ClienteG.nombre)
+      this._router.navigate(['/inicio']);
+    
+
     this.cliente = ClienteG.nombre;
     this.id = this.ficha.idCliente.toString();
     this._pagoService.getPagoByFicha(this.ficha.idFicha).subscribe((data:Pago[])=>{
@@ -35,6 +40,10 @@ export class FichaDetalleComponent implements OnInit {
    }
 
   ngOnInit() {
+  }
+
+  nuevoPago(){
+    this._router.navigate(['nuevo-pago']);
   }
 
   editarFicha(ficha:Ficha){
