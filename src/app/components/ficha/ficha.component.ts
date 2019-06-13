@@ -22,19 +22,33 @@ export class FichaComponent implements OnInit {
 
   constructor(private _clienteService : ClienteService,
     private _fichaService : FichaService,
-    private _router:Router
+    private _router:Router,
+    private _routerActivo:ActivatedRoute
+    
   ) {
    
+    
 // Tomar id por url
-
+this._routerActivo.params.subscribe(params=>{
+  if(params['id']){
+    console.log(params['id']); 
+    this._fichaService.getFichaPagadaByIdCliente(params['id']).subscribe((data:Ficha[])=>{
+      console.log(data);
+      this.fichas = data;
+      });
+  }else{
     this.cliente = this._clienteService.getClienteByClienteG();
     console.log(this.cliente);
-
-  
-  this._fichaService.getFichaPagadaByIdCliente(this.cliente.idCliente).subscribe((data:Ficha[])=>{
+    this._fichaService.getFichaPagadaByIdCliente(this.cliente.idCliente).subscribe((data:Ficha[])=>{
     console.log(data);
     this.fichas = data;
-  });
+    });
+  }
+  
+});
+
+
+  
 
 
 

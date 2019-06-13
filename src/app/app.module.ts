@@ -27,6 +27,7 @@ import { FichaDetalleComponent } from './components/ficha/ficha-detalle/ficha-de
 import { PagoComponent } from './components/pago/pago.component';
 import { ReservaDetalleComponent } from './components/reserva/reserva-detalle/reserva-detalle.component';
 import { PagoNuevoComponent } from './components/pago/pago-nuevo/pago-nuevo.component';
+import { PagoListaComponent } from './components/pago/pago-lista/pago-lista.component';
 
 registerLocaleData(localeES, "es");
 
@@ -48,6 +49,7 @@ registerLocaleData(localeES, "es");
     PagoComponent,
     ReservaDetalleComponent,
     PagoNuevoComponent,
+    PagoListaComponent,
     
    
     

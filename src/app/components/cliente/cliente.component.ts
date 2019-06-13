@@ -76,9 +76,10 @@ export class ClienteComponent implements OnInit {
 
 }
 
-pagoCliente(cliente)
+pagoCliente(cliente:Cliente)
 {
   console.log(cliente);
+  this._router.navigate(['/pagos',cliente.idCliente])
 }
 
 

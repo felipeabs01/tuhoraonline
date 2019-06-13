@@ -65,22 +65,26 @@ export class ReservaComponent implements OnInit {
 
     this.configuracion = this._configuracionService.configuracion;
     console.log(this.configuracion);
-
+    console.log(this._configuracionService.configuracion);
     
+
+
     if(!this.configuracion){
-      this._configuracionService.
-      getConfiguracionByCorreo(localStorage.getItem('name'))
-      .subscribe(data=>{
-          console.log(data[0]);
-          this._configuracionService.configuracion = data[0];
-          this.configuracion = data[0];
+
+      var as = this._configuracionService.getConfiguracion();
+      Promise.all([as]).then(data =>{
+        console.log(data);
+        console.log(this._configuracionService.configuracion);
+        console.log(this.formattedDate);
+        this._router.navigate(['reserva',this.formattedDate]);
       })
 
     }
 
 
      
-
+      console.log(this.configuracion);
+      console.log(this.configuracion.minTurno);
 
       if(this.configuracion.minTurno <= 30)
         this.salto = 50;
