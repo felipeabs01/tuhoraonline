@@ -9,12 +9,12 @@ import { CommonModule } from '@angular/common';
 })
 export class Pago {
 
-  idPago : number;
-  idBoleta: number;
+  idPagoCliente : number;
+  idBoletaCliente: number;
   idTipoPago: number;
   fecha : string;
   monto : number;
   activo : boolean;
  }
 
-
+ 

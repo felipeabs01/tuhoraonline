@@ -49,8 +49,8 @@ url : string;
       console.log("Async Work Complete");
       this.http.post<Pago>(url,body,{headers}).pipe(
         map(response => response)).subscribe((data:Pago) => {
-         
-          
+          console.log(body);
+          console.log(data);
             resolve("agregado"+body);
           
         });
