@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PagoService } from '../../../services/pago.service';
 import { Pago } from '../../../models/pago.module';
+import { ClienteG } from '../../../models/cliente.module';
+
 
 @Component({
   selector: 'app-pago-lista',
@@ -10,11 +12,14 @@ import { Pago } from '../../../models/pago.module';
 export class PagoListaComponent implements OnInit {
 
   pagos:Pago[]=[];
+  cliente:string;
 
   constructor(
     private _routerActivo:ActivatedRoute,
     private _pagoService:PagoService
   ) { 
+
+    this.cliente = ClienteG.idCliente.toString();
 
     this._routerActivo.params.subscribe(params=>{
       if(params['id']){
