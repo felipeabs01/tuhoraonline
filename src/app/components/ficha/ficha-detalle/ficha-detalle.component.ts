@@ -16,6 +16,7 @@ export class FichaDetalleComponent implements OnInit {
   cliente:string;
   id:string;
 
+  
 
   pagos:Pago[]=[];
 
@@ -24,8 +25,9 @@ export class FichaDetalleComponent implements OnInit {
     private _pagoService:PagoService
   ) {
     
-
+    
     this.ficha = this._fichaService.getFichaG();
+    
     if(!this.ficha || !ClienteG.nombre)
       this._router.navigate(['/inicio']);
     

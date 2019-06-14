@@ -98,9 +98,9 @@ private _pagoService:PagoService) {
 
   pago.activo = true;
   pago.fecha = this.registerForm.value.fecha;
-  pago.idBoleta = this.boleta.idBoletaCliente;
-  pago.idTipoPago = this.registerForm.value.pago;
-  pago.monto = this.registerForm.value.monto;
+  pago.idBoletaCliente = this.boleta.idBoletaCliente;
+  pago.idTipoPago = +this.registerForm.value.pago;
+  pago.monto = +this.registerForm.value.monto;
 
   console.log(pago);
 

@@ -45,3 +45,7 @@
 .example-full-width {
     width: 100%;
 }
+
+body {
+    overflow: scroll !important;
+}
