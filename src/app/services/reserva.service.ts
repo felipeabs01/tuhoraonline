@@ -34,11 +34,16 @@ res: Observable<Reserva>;
     return this.http.get(url, {headers});
   }
 
-  getReservasByEmpresaFecha(idempresa:number, fecha:string){
-    return this.getQuery(`reserva/filtro/empresa/${idempresa}/fecha/${fecha}`);
+  getReservasByEmpresaFechaEmail(idempresa:number, fecha:string, email:string){
+    return this.getQuery(`reserva/filtro/empresa/${idempresa}/fecha/${fecha}/email/${email}`);
+  }
+
+  getReservasByEmpresaFechaAdm(idempresa:number, fecha:string){
+    return this.getQuery(`reserva/filtro/empresa/${idempresa}/fecha/${fecha}/adm`);
   }
 
 
+ByteString
    assign(data:Reserva){
      this.reserva = data;
      

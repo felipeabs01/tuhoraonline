@@ -12,14 +12,14 @@ import { ClienteG } from '../../../models/cliente.module';
 export class PagoListaComponent implements OnInit {
 
   pagos:Pago[]=[];
-  cliente:string;
+  cliente=0;
 
   constructor(
     private _routerActivo:ActivatedRoute,
     private _pagoService:PagoService
   ) { 
 
-    this.cliente = ClienteG.idCliente.toString();
+    this.cliente = ClienteG.idCliente;
 
     this._routerActivo.params.subscribe(params=>{
       if(params['id']){

@@ -123,7 +123,7 @@ export class ReservaComponent implements OnInit {
       console.log();
       console.log(this.configuracion);
       
-       this.subscription =  this._reservaService.getReservasByEmpresaFecha(this.configuracion.idEmpresa,fecha).subscribe(  (data:Reserva[])=>{
+       this.subscription =  this._reservaService.getReservasByEmpresaFechaEmail(this.configuracion.idEmpresa,fecha,localStorage.getItem('name')).subscribe(  (data:Reserva[])=>{
         this.reservas = data;
 
         console.log(fecha);
